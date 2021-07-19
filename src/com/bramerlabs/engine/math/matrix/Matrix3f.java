@@ -19,7 +19,7 @@ public class Matrix3f {
     /**
      * the elements of this matrix
      */
-    private float[] elements = new float[SIZE * SIZE];
+    private final float[] elements = new float[SIZE * SIZE];
 
     /**
      *

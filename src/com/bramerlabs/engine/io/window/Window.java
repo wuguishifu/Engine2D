@@ -1,6 +1,8 @@
 package com.bramerlabs.engine.io.window;
 
 import com.bramerlabs.engine.EngineConstants;
+import com.bramerlabs.engine.math.matrix.Matrix4f;
+import com.bramerlabs.engine.math.vector.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
@@ -12,13 +14,13 @@ import java.awt.*;
 public class Window {
 
     // the window title
-    private String TITLE = EngineConstants.APPLICATION_NAME;
+    private final String TITLE = EngineConstants.APPLICATION_NAME;
 
     // the framerate - true designates use default refresh rate
     private static final int FRAMERATE = GLFW.GLFW_TRUE; // 60 fps on standard monitors
 
     // the fullscreen display mode size
-    private DisplayMode displayMode;
+    private final DisplayMode displayMode;
 
     // window size and position
     private int width, height;
@@ -43,6 +45,9 @@ public class Window {
     // window callbacks
     private final Input input;
 
+    // the projection matrix
+    private Matrix4f projection;
+
     /**
      * constructor for specified input object
      * @param input - the input for handling callbacks in this window
@@ -58,6 +63,9 @@ public class Window {
         // set the current width and height to the default
         this.width = defaultWidth;
         this.height = defaultHeight;
+
+        // create a projection matrix
+        this.projection = Matrix4f.projection(70.0f, (float) width / (float) height, 0.1f, 100f);
 
         // set the input device
         this.input = input;
@@ -177,6 +185,9 @@ public class Window {
             this.y = input.getWindowY();
             this.width = input.getWindowWidth();
             this.height = input.getWindowHeight();
+
+            // calculate a new projection matrix
+            this.projection = Matrix4f.projection(70.0f, (float) width / (float) height, 0.1f, 1000f);
         }
 
         // calculate framerate
@@ -273,6 +284,14 @@ public class Window {
      */
     public boolean isFullscreen() {
         return this.isFullscreen;
+    }
+
+    /**
+     * getter method
+     * @return - the projection matrix of this window
+     */
+    public Matrix4f getProjectionMatrix() {
+        return this.projection;
     }
 
 }
