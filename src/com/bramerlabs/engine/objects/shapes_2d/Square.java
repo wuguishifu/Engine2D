@@ -15,10 +15,10 @@ public class Square extends RenderObject {
     public static Mesh createMesh(Material material) {
         return new Mesh(
                 new Vertex[]{
-                        new Vertex(new Vector2f(-0.5f, -0.5f), new Vector2f(0, 0)),
-                        new Vertex(new Vector2f( 0.5f, -0.5f), new Vector2f(1, 0)),
-                        new Vertex(new Vector2f(-0.5f,  0.5f), new Vector2f(0, 1)),
-                        new Vertex(new Vector2f( 0.5f,  0.5f), new Vector2f(1, 1)),
+                        new Vertex(new Vector2f(-0.5f, -0.5f), new Vector2f(0, 1)),
+                        new Vertex(new Vector2f( 0.5f, -0.5f), new Vector2f(1, 1)),
+                        new Vertex(new Vector2f( 0.5f,  0.5f), new Vector2f(1, 0)),
+                        new Vertex(new Vector2f(-0.5f,  0.5f), new Vector2f(0, 0)),
                 },
                 new int[]{0, 1, 2, 0, 2, 3},
                 material
